@@ -1,52 +1,47 @@
 package com.carconsole;
 
+import java.util.Scanner;
+
 public class Main
 {
-    public static void main(String[] args) {
-//        //多态：父接口引用指向子类对象
-//        CarCommand cmd1 = new ForwardCommand();
-//        CarCommand cmd2 = new StopCommand();
-//
-//        cmd1.execute();
-//        cmd2.execute();
-
-        //匿名内部类，不新建类，直接实现接口
-//        CarCommand leftCommand = new CarCommand() {
-//            @Override
-//            public void execute()
-//            {
-//                System.out.println("小车左转");
-//            }
-//        };
-//        leftCommand.execute();
-//    }
-
-//    public static void execute(CarCommand cmd)
-//    {
-//        if (cmd instanceof ForwardCommand)
-//        {
-//            System.out.println("小车正在前进...");
-//        }
-//        if (cmd instanceof StopCommand)
-//        {
-//            System.out.println("小车已停止");
-//        }
-//
-//        cmd.execute();
-//    }
-
-
+    public static void main(String[] args)
+    {
         CarController controller = new CarController();
-        try {
-            controller.executeCommand("forward");
-            controller.executeCommand("");
-        } catch (CarCommandException e) {
-            System.out.println("错误！" + e.getMessage());
-        }finally {
-            System.out.println("指令处理流程结束");
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("===============小车控制台已启动===============");
+        System.out.println("支持指令：forward，stop");
+        System.out.println("输入 quit 退出");
+
+        //等待用户输入
+        while (true)
+        {
+            System.out.println("请输入指令：");
+
+            //scanner.nextLine() 会卡住程序，直到你敲了字并按回车，它才把你敲的内容读进来
+            //.trim() 去掉你输入内容前后的空格（比如你不小心打了个空格）
+            //.toLowerCase() 把你输入的大写字母变成小写（这样你输入 Forward 也能识别）
+            String input = sc.nextLine().trim().toLowerCase();
+
+            //如果用户输入 quit 就退出循环
+            if ("quit".equals(input))
+            {
+                System.out.println("退出控制台");
+                break;
+            }
+
+            //把输入的指令给CarControler执行，捕获异常
+            try
+            {
+                controller.executeCommand(input);
+            }catch (CarCommandException e)
+            {
+                System.out.println("错误指令：" +e.getMessage());
+            }
+
         }
-
-
-
+        //关闭读取器（输入器）
+        sc.close();
     }
 }
