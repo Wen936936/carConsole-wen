@@ -27,6 +27,7 @@ public class Main
             //如果用户输入 quit 就退出循环
             if ("quit".equals(input))
             {
+                System.out.println("本次操作历史：" + controller.getHistoryList());
                 System.out.println("退出控制台");
                 break;
             }
