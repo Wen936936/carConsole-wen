@@ -12,13 +12,16 @@ public class CarController
     //List属于接口，是ArrayList的父类，这里是多态的写法，后面的new ArrayList<>()以后也可以改成其他的
     private List<String> historyList = new ArrayList<>();
 
+    //对应指令方法
     public CarController()
     {
         commandMap.put("forward",new ForwardCommand());
         commandMap.put("stop",new StopCommand());
+        commandMap.put("left",new LeftCommand());
+        commandMap.put("right",new RightCommand());
     }
 
-
+    //执行指令
     public void executeCommand(String action) throws CarCommandException
     {
         //查找指令
@@ -34,6 +37,7 @@ public class CarController
         historyList.add(action);
     }
 
+    //查看历史指令
     public List<String> getHistoryList()
     {
         return historyList;

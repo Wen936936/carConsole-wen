@@ -18,7 +18,6 @@ public class Main
         while (true)
         {
             System.out.println("请输入指令：");
-
             //scanner.nextLine() 会卡住程序，直到你敲了字并按回车，它才把你敲的内容读进来
             //.trim() 去掉你输入内容前后的空格（比如你不小心打了个空格）
             //.toLowerCase() 把你输入的大写字母变成小写（这样你输入 Forward 也能识别）
@@ -32,6 +31,13 @@ public class Main
                 break;
             }
 
+            if ("history".equals(input))
+            {
+                System.out.println("历史指令：" + controller.getHistoryList());
+                continue;
+            }
+
+            //异常
             //把输入的指令给CarControler执行，捕获异常
             try
             {
