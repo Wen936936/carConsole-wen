@@ -11,7 +11,7 @@ public class Main
         Scanner sc = new Scanner(System.in);
 
         System.out.println("===============小车控制台已启动===============");
-        System.out.println("支持指令：forward，stop");
+        System.out.println("支持指令：forward,stop,left,right,history");
         System.out.println("输入 quit 退出");
 
         //等待用户输入
